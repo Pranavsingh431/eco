@@ -19,18 +19,6 @@ export default function Home() {
   const handleFormSubmit = async (projectData: Project) => {
     setIsLoading(true);
     setSelectedProject(null); // Clear selected project to show new one
-    
-    // Validate environment
-    if (typeof window !== 'undefined' && !process.env.GEMINI_API_KEY) {
-      toast({
-        title: 'Configuration Error',
-        description: 'API key is not configured. Please contact the administrator.',
-        variant: 'destructive',
-      });
-      setIsLoading(false);
-      return;
-    }
-    
     try {
       const result = await evaluateProjectSustainability(projectData);
       
